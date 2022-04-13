@@ -1,0 +1,215 @@
+<section class="vh-95 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-9 col-xl-7">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">User Registration Form</h3>
+
+                        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+
+                                    <div class="form-outline">
+                                        <label class="form-label" for="name">Name </label>
+                                        <input type="text" class="form-control form-control-lg" id="name" name="name"
+                                            formControlName="name">
+                                    </div>
+                                    
+                                    <p class="text-danger" *ngIf="isSubmitted && f['name'].errors?.['required']">
+                                        Username is required
+                                    </p>
+                                    <p class="text-danger" *ngIf="name && name.touched && name.invalid">
+                                        Username must contain only letters and spaces
+                                    </p>
+                                    <p class="text-danger" *ngIf="f['name'].errors?.['minlength']">
+                                        Username must be at least 2 characters
+                                    </p>
+                                    <p class="text-danger" *ngIf="f['name'].errors?.['maxlength']">
+                                        Username must not exceed 30 characters
+                                    </p>
+                                </div>
+                                <div class="col-md-6 mb-4">
+
+                                    <div class="form-outline">
+                                        <label class="form-label" for="email">Email </label>
+                                        <input type="text" class="form-control form-control-lg" id="email" name="email"
+                                            formControlName="email">
+                                        <p class="text-danger" *ngIf="email && email.invalid && email.touched">
+                                            Enter a valid email
+                                        </p>
+                                        <p class="text-danger" *ngIf="isSubmitted && f['email'].errors?.['required']">
+                                            Email is required
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4 d-flex align-items-center">
+
+                                    <div class="form-outline">
+                                        <label class="form-label" for="mobile">Mobile</label>
+                                        <input type="text" class="form-control form-control-lg" id="mobile"
+                                            name="mobile" formControlName="mobile">
+                                        <p class="text-danger" *ngIf="isSubmitted && f['mobile'].errors?.['mobile']">
+                                            Mobile is required
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 mb-4">
+
+                                    <h6 class="mb-2 pb-1">Gender: </h6>
+
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label" for="maleGender">Male</label>
+                                        <input class="form-check-input" type="radio" name="gender" id="maleGender"
+                                            value="male" formControlName="gender" />
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label" for="femaleGender">Female</label>
+                                        <input class="form-check-input" type="radio" name="gender" id="femaleGender"
+                                            value="female" formControlName="gender" />
+                                    </div>
+                                    <p class="text-danger" *ngIf="isSubmitted && f['gender'].errors?.['required']">
+                                        Please select gender
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        <label class="form-label select-label">Select Category</label>
+                                        <select class="select form-control-lg" formControlName="category">
+                                            <option disabled>Choose Value</option>
+                                            <option value="">Choose Category</option>
+                                            <option *ngFor="let category of Category">
+                                                {{category}}
+                                            </option>
+                                        </select>
+                                        <p class="text-danger" *ngIf="category && category.invalid && category.touched">
+                                            Please selct a valid category</p>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <h6 class="mb-2 pb-1">Technology: </h6>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input me-3" type="checkbox" formControlName="ct" />
+                                        <label class="form-check-label">
+                                            C
+                                        </label>&nbsp;&nbsp;
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input me-3" type="checkbox" formControlName="cplus" />
+                                        <label class="form-check-label">
+                                            C++
+                                        </label>&nbsp;&nbsp;
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input me-3" type="checkbox" formControlName="java" />
+                                        <label class="form-check-label">
+                                            Java
+                                        </label>&nbsp;&nbsp;
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input me-3" type="checkbox" formControlName="python" />
+                                        <label class="form-check-label">
+                                            Python
+                                        </label>&nbsp;&nbsp;
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input me-3" type="checkbox"
+                                            formControlName="javascript" />
+                                        <label class="form-check-label">
+                                            Javascript
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <label>Profile Photo</label>
+                                    <input type="file" formControlName="profilePhoto" (change)="imageUpload($event)"
+                                        class="form-control" />
+                                </div>
+                                <p class="text-danger"
+                                    *ngIf="profilePhoto && profilePhoto.invalid && profilePhoto.touched">
+                                    Select JPG/JPEG/PNG file only</p>
+                                <p class="text-danger" *ngIf="loginForm.valid && profilePhoto && !profilePhoto.touched">
+                                    Please select an image file to upload</p>
+                            </div>
+
+                            <div class="mt-4 pt-2">
+                                <!-- Button trigger modal -->
+                                <button type="submit" class="btn btn-lg btn-outline-primary" (click)="openModal()"
+                                    [disabled]="loginForm.invalid">Preview</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{display:displayStyle}">
+    <div class="model-dialog model-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Preview Filled Form</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <ul class="list-group" *ngFor="let data of dataUser">
+                            <strong>Name</strong>
+                            <li class="list-group-item">{{data.name}}</li>
+                            <strong>Email</strong>
+                            <li class="list-group-item">{{data.email}}</li>
+                            <strong>Mobile</strong>
+                            <li class="list-group-item">{{data.mobile}}</li>
+                            <strong>Gender</strong>
+                            <li class="list-group-item">{{data.gender}}</li>
+                            <strong>Category</strong>
+                            <li class="list-group-item">{{data.category}}</li>
+                            <strong>Category</strong>
+                            <li class="list-group-item">
+                                <span *ngIf="data.ct==true">C</span>&nbsp;
+                                <span *ngIf="data.cplus==true">C++</span>&nbsp;
+                                <span *ngIf="data.java==true">Java</span>&nbsp;
+                                <span *ngIf="data.python==true">Python</span>&nbsp;
+                                <span *ngIf="data.javascript==true">Javascript</span>&nbsp;
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <ul class="list-group">
+                            <strong>Profile Photo</strong>
+                            <li class="list-group-item">
+                                <img [src]="profileImage" (load)="handleImageLoad()" height="50%" width="50%"
+                                    style="object-fit: cover;">
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModal()">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-primary" (click)="submitForm()">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

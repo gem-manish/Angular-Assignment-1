@@ -1,0 +1,32 @@
+<table class="table mt-4">
+    <thead>
+        <tr>
+            <td scope="col">Name</td>
+            <td scope="col">Email</td>
+            <td scope="col">Mobile</td>
+            <td scope="col">Gender</td>
+            <td scope="col">Category</td>
+            <td scope="col">Technology</td>
+            <td scope="col">Profile Photo</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of allUserDetails">
+            <td scope="col">{{data.name}}</td>
+            <td scope="col">{{data.email}}</td>
+            <td scope="col">{{data.mobile}}</td>
+            <td scope="col">{{data.gender}}</td>
+            <td scope="col">{{data.category}}</td>
+            <td scope="col">
+                <span *ngIf="data.ct==true">C</span>&nbsp;
+                <span *ngIf="data.cplus==true">C++</span>&nbsp;
+                <span *ngIf="data.java==true">Java</span>&nbsp;
+                <span *ngIf="data.python==true">Python</span>&nbsp;
+                <span *ngIf="data.javascript==true">Javascript</span>
+            </td>
+            <td scope="col">
+                <img [src]="picUrl" height="20%" width="20%" style="object-fit: cover;">
+            </td>
+        </tr>
+    </tbody>
+</table>
